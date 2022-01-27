@@ -15,3 +15,10 @@
     `python app/run.py`
 
 3. Go to http://0.0.0.0:3001/
+
+If fail to connect:
+
+Local Machine
+
+Once your app is running (python run.py)
+Go to http://localhost:3001 and the app will now run

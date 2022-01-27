@@ -88,6 +88,33 @@ def index():
         }
     ]
     
+    # add another plot on the frequency of response category
+    # extract data needed for visuals
+    categories = df.iloc[:, 4:].columns.values
+    freq = df.iloc[:, 4:].sum(axis=0).values
+    cat_num = pd.DataFrame({'category':categories, 
+                           'freq': freq}).sort_values('freq',ascending=False)
+    
+    # create visuals
+    graphs.append(
+        {
+            'data': [
+                Bar(
+                    x=cat_num['freq'].values,
+                    y=cat_num['category'].values,
+                    orientation='h'
+                )
+            ],
+
+            'layout': {
+                'title': 'Frequency of Response Categories',
+                'xaxis': {
+                    'title': "Count"
+                }
+            }
+        }
+    )
+    
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
